@@ -8,7 +8,7 @@ export function renderUserPosts () {
         }
         const {id, imageUrl, createdAt, description, likes, isLiked} = userPost;
         const {user} = userPost;
-  
+        const lenLikes = likes.length;
         return `<li class="post">
           <div class="post-image-container">
             <img class="post-image" src="${imageUrl}">
@@ -18,7 +18,7 @@ export function renderUserPosts () {
               <img src="${isLiked ?'./assets/images/like-active.svg':'./assets/images/like-not-active.svg'}">
             </button>
             <p class="post-likes-text">
-              Нравится: <strong>${likes.length}</strong>
+              Нравится: <strong>${lenLikes === 0? 0 : `${likes.at(-1).name}${lenLikes > 1? `и еще ${lenLikes - 1}`: ''}` }</strong>
             </p>
           </div>
           <p class="post-text">

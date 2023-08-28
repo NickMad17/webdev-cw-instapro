@@ -33,14 +33,20 @@ export function renderPostsPageComponent({ appEl, token }) {
             // Ревлизовать апи удаления Лайков
             disLike({token, id})
               .then((newPost) => {
-                // renderPostsPageComponent({ appEl, token })
+                post.likes = newPost.post.likes;
+                post.isLiked = newPost.post.isLiked;
+
+                renderPostsPageComponent({ appEl, token })
               })
             
           } else {
             // Ревлизовать апи добавления Лайков
             addLike({token, id})
               .then((newPost) => {
-                // renderPostsPageComponent({ appEl, token })
+                post.likes = newPost.post.likes;
+                post.isLiked = newPost.post.isLiked;
+
+                renderPostsPageComponent({ appEl, token })
               })
             
             
