@@ -78,23 +78,20 @@ export const goToPage = (newPage, data) => {
           if(post.user.id === data.userId){
             return post;
           }
-          page = USER_POSTS_PAGE;
         });
+        page = USER_POSTS_PAGE;
         console.log("Открываю страницу пользователя: ", data.userId);
         renderApp();
       }, 1500)
     }
-
     page = newPage;
     renderApp();
-
-    return;
   }
 
   throw new Error("страницы не существует");
 };
 
-const renderApp = () => {
+export const renderApp = () => {
   const appEl = document.getElementById("app");
   if (page === LOADING_PAGE) {
     return renderLoadingPageComponent({
@@ -143,6 +140,7 @@ const renderApp = () => {
   if (page === USER_POSTS_PAGE) {
     return renderUserPostsPageComponent({
       appEl,
+      token: getToken(),
       goToPage,
     });
     

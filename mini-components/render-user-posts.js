@@ -1,4 +1,6 @@
 import { userPosts } from "../index.js";
+import { formatDistanceToNow } from 'date-fns';
+import { ru } from 'date-fns/locale';
 
 export function renderUserPosts () {
     console.log(userPosts);
@@ -8,7 +10,9 @@ export function renderUserPosts () {
         }
         const {id, imageUrl, createdAt, description, likes, isLiked} = userPost;
         const {user} = userPost;
-  
+        const lenLikes = likes.length;
+        const date = formatDistanceToNow(new Date(createdAt), {locale: ru});
+
         return `<li class="post">
           <div class="post-image-container">
             <img class="post-image" src="${imageUrl}">
@@ -18,7 +22,7 @@ export function renderUserPosts () {
               <img src="${isLiked ?'./assets/images/like-active.svg':'./assets/images/like-not-active.svg'}">
             </button>
             <p class="post-likes-text">
-              Нравится: <strong>${likes.length}</strong>
+              Нравится: <strong>${lenLikes === 0? 0 : `${likes.at(-1).name}${lenLikes > 1? `и еще ${lenLikes - 1}`: ''}` }</strong>
             </p>
           </div>
           <p class="post-text">
@@ -26,7 +30,7 @@ export function renderUserPosts () {
             ${description}
           </p>
           <p class="post-date">
-          ${new Date(createdAt)}
+          ${`${date} назад`}
             <!--19 минут назад-->
           </p>
         </li>`

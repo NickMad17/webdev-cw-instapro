@@ -1,4 +1,5 @@
 import { loginUser, registerUser } from "../api.js";
+import { censured } from "../mini-components/censured.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
@@ -104,9 +105,9 @@ export function renderAuthPageComponent({ appEl, setUser }) {
             setError(error.message);
           });
       } else {
-        const login = document.getElementById("login-input").value;
-        const name = document.getElementById("name-input").value;
-        const password = document.getElementById("password-input").value;
+        const login = censured(document.getElementById("login-input").value);
+        const name = censured(document.getElementById("name-input").value);
+        const password = censured(document.getElementById("password-input").value);
         if (!name) {
           alert("Введите имя");
           return;

@@ -1,10 +1,14 @@
 import { posts } from "../index.js";
+import { formatDistanceToNow } from 'date-fns'
+import { ru } from 'date-fns/locale'
 
 export function renderPosts () {
     const postsContainer = posts.map(post => {
         const {id, imageUrl, createdAt, description, likes, isLiked} = post;
         const {user} = post;
         const lenLikes = likes.length;
+        const date = formatDistanceToNow(new Date(createdAt), {locale: ru});
+       
         return `<li class="post">
           <div class="post-header" data-user-id="${user.id}">
               <img src="${user.imageUrl}" class="post-header__user-image">
@@ -26,12 +30,10 @@ export function renderPosts () {
             ${description}
           </p>
           <p class="post-date">
-          ${new Date(createdAt)}
+          ${`${date} назад`}
             <!--19 минут назад-->
           </p>
         </li>`
     })
     return postsContainer.join("").replace(',','');
-
-    
 } 
