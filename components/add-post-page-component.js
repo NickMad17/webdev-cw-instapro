@@ -1,5 +1,6 @@
 import { renderUploadImageComponent } from "./upload-image-component.js";
 import { renderHeaderComponent } from "./header-component.js";
+import { censured } from "../mini-components/censured.js";
 
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
@@ -47,11 +48,8 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
     document.getElementById("add-button").addEventListener("click", () => {
       const textInput = document.getElementById('textInput');
-      const text = textInput.value
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;");
+      const text = censured(textInput.value)
+      ;
 
       if (imageUrl && text){
         onAddPostClick({

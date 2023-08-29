@@ -78,17 +78,14 @@ export const goToPage = (newPage, data) => {
           if(post.user.id === data.userId){
             return post;
           }
-          page = USER_POSTS_PAGE;
         });
+        page = USER_POSTS_PAGE;
         console.log("Открываю страницу пользователя: ", data.userId);
         renderApp();
       }, 1500)
     }
-
     page = newPage;
     renderApp();
-
-    return;
   }
 
   throw new Error("страницы не существует");

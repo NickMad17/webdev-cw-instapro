@@ -1,7 +1,6 @@
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUserPosts } from "../mini-components/render-user-posts.js";
 import { userPosts } from "../index.js";
-import { posts } from "../index.js";
 import { addLike, disLike } from "../api.js";
 
 
